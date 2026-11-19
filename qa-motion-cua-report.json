@@ -11,7 +11,9 @@
     "escapeClosesMenu": true,
     "moleculeStopsOutsideView": true,
     "visibleMoleculeFreezes": true,
-    "orbitPauses": true
+    "orbitPauses": true,
+    "heroFrameCannotScroll": true,
+    "heroLayersStayAligned": true
   },
   "faq": [
     {

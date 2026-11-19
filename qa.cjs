@@ -111,6 +111,7 @@ let browser;
  await page.locator('.motion-toggle').click();
  check('Pause control stops automatic imagery',await page.locator('.hero').evaluate(e=>e.classList.contains('motion-paused')));
  check('Pause control stops all decorative loops',await page.locator('html').getAttribute('data-motion')==='paused' && await page.locator('.molecule').evaluate(e=>getComputedStyle(e).animationPlayState)==='paused');
+ check('Hero imagery cannot scroll inside its clipped frame',await page.locator('.hero').evaluate(e=>e.scrollTop===0 && e.scrollHeight<=e.clientHeight+1));
  await page.locator('[data-scene="1"]').click();
  check('Manual hero image selection works',await page.locator('[data-scene="1"]').getAttribute('aria-pressed')==='true' && await page.locator('[data-scene-image="1"]').evaluate(e=>e.classList.contains('is-active')));
  await page.locator('.motion-toggle').click();

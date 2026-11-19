@@ -96,6 +96,7 @@ footer{padding-top:75px;background:var(--ink);color:#e8f6e7}.footer-top{display:
 @keyframes hero-line-in{from{opacity:0;transform:translate3d(0,34px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 @keyframes soft-in{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 .hero-scene{animation:hero-drift 17s ease-in-out infinite alternate;animation-play-state:paused;transform:scale(1.025)}
+.hero,.hero-scenes{overflow:clip}
 .hero.motion-visible .hero-scene.is-active{animation-play-state:running}
 @keyframes hero-drift{from{transform:scale(1.025)}to{transform:scale(1.085)}}
 
