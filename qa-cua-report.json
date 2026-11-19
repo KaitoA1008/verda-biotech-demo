@@ -1,0 +1,137 @@
+{
+  "method": "CUA / ChatGPT in-app browser",
+  "result": "PASS",
+  "viewports": [
+    {
+      "bodyWidth": 305,
+      "brokenLinks": [],
+      "documentWidth": 305,
+      "moleculeSquare": true,
+      "noHorizontalOverflow": true,
+      "sections": 8,
+      "width": 320
+    },
+    {
+      "bodyWidth": 360,
+      "brokenLinks": [],
+      "documentWidth": 360,
+      "moleculeSquare": true,
+      "noHorizontalOverflow": true,
+      "sections": 8,
+      "width": 375
+    },
+    {
+      "bodyWidth": 753,
+      "brokenLinks": [],
+      "documentWidth": 753,
+      "moleculeSquare": true,
+      "noHorizontalOverflow": true,
+      "sections": 8,
+      "width": 768
+    },
+    {
+      "bodyWidth": 1009,
+      "brokenLinks": [],
+      "documentWidth": 1009,
+      "moleculeSquare": true,
+      "noHorizontalOverflow": true,
+      "sections": 8,
+      "width": 1024
+    },
+    {
+      "bodyWidth": 1425,
+      "brokenLinks": [],
+      "documentWidth": 1425,
+      "moleculeSquare": true,
+      "noHorizontalOverflow": true,
+      "sections": 8,
+      "width": 1440
+    }
+  ],
+  "faq": [
+    {
+      "question": "What is Verda?",
+      "toggles": true
+    },
+    {
+      "question": "What does plant-derived chemistry mean here?",
+      "toggles": true
+    },
+    {
+      "question": "Is Folia a commercially available product?",
+      "toggles": true
+    },
+    {
+      "question": "Who is this concept designed to speak to?",
+      "toggles": true
+    },
+    {
+      "question": "Can we discuss a collaboration?",
+      "toggles": true
+    }
+  ],
+  "navigation": [
+    {
+      "name": "Our science",
+      "hash": "#technology",
+      "menuExpanded": "false",
+      "expected": "#technology"
+    },
+    {
+      "name": "Our approach",
+      "hash": "#approach",
+      "menuExpanded": "false",
+      "expected": "#approach"
+    },
+    {
+      "name": "Folia",
+      "hash": "#folia",
+      "menuExpanded": "false",
+      "expected": "#folia"
+    },
+    {
+      "name": "Vision",
+      "hash": "#vision",
+      "menuExpanded": "false",
+      "expected": "#vision"
+    },
+    {
+      "name": "Team",
+      "hash": "#team",
+      "menuExpanded": "false",
+      "expected": "#team"
+    },
+    {
+      "name": "FAQ",
+      "hash": "#faq",
+      "menuExpanded": "false",
+      "expected": "#faq"
+    },
+    {
+      "name": "Let’s talk",
+      "hash": "#contact",
+      "menuExpanded": "false",
+      "expected": "#contact"
+    }
+  ],
+  "imagery": {
+    "pause": true,
+    "resume": true,
+    "caption": "It starts with nature",
+    "manualSelectionPauses": true,
+    "natureSelected": "true"
+  },
+  "form": {
+    "emptyFieldsRejected": true,
+    "invalidEmailRejected": true,
+    "shortMessageRejected": true,
+    "validFormReportsNoMessageSent": true
+  },
+  "mobileMenu": {
+    "opens": true,
+    "escapeCloses": true,
+    "focusRestored": true,
+    "contactAnchorClosesMenu": true
+  },
+  "reducedMotion": "CSS media query and matchMedia gate reviewed; OS preference was not changed during CUA checks"
+}

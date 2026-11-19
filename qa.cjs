@@ -31,7 +31,8 @@ let browser;
   check(`Valid anchor: ${a.text}`,Boolean(a.href && a.href.startsWith('#') && await page.locator(a.href).count()===1));
  }
  check('No trailing periods on headings or UI actions',await page.locator('h1,h2,h3,button,label,summary,.text-link').evaluateAll(nodes=>nodes.every(n=>!n.textContent.trim().endsWith('.'))));
- check('Reduced motion disables animation',await page.locator('.hero-specimen').evaluate(e=>getComputedStyle(e).animationName)==='none');
+ check('Reduced motion disables hero transitions',await page.locator('.hero-scene').first().evaluate(e=>getComputedStyle(e).transitionDuration)==='0s');
+ check('Reduced motion disables automatic imagery',await page.locator('.motion-toggle').isDisabled());
  check('Reduced motion disables smooth scrolling',await page.locator('html').evaluate(e=>getComputedStyle(e).scrollBehavior)==='auto');
  for(const width of [1440,1024,768,375,320]){
   await page.setViewportSize({width,height:width<500?812:1000});
@@ -103,7 +104,14 @@ let browser;
  for(const section of await page.locator('main > section').all()){await section.scrollIntoViewIfNeeded();}
  await page.waitForTimeout(800);
  check('Scroll reveals become visible',await page.locator('.will-reveal').evaluateAll(es=>es.every(e=>e.classList.contains('visible'))));
- check('Standard mode enables subtle animation',await page.locator('.hero-specimen').evaluate(e=>getComputedStyle(e).animationName)==='float');
+ await page.locator('body').press('Control+Home');
+ check('Standard mode enables motion control',await page.locator('.motion-toggle').isEnabled());
+ await page.locator('.motion-toggle').click();
+ check('Pause control stops automatic imagery',await page.locator('.hero').evaluate(e=>e.classList.contains('motion-paused')));
+ await page.locator('[data-scene="1"]').click();
+ check('Manual hero image selection works',await page.locator('[data-scene="1"]').getAttribute('aria-pressed')==='true' && await page.locator('[data-scene-image="1"]').evaluate(e=>e.classList.contains('is-active')));
+ await page.locator('.motion-toggle').click();
+ check('Motion can resume after manual image selection',await page.locator('.hero').evaluate(e=>!e.classList.contains('motion-paused')));
  check('No JavaScript errors',errors.length===0);
  check('No failed asset responses',failed.length===0);
  check('Only local network resources used',requests.every(r=>r.url.startsWith(base)));

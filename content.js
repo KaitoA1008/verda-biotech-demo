@@ -3,21 +3,26 @@ window.VERDA_CONTENT = {
   brand: 'verda',
   title: 'Verda — A future grown from nature',
   hero: {
-    eyebrow: 'Nature is the starting point',
-    headline: 'A better future,|rooted in biology',
-    intro: 'Exploring the potential of plant-based chemistry to reimagine the materials we use every day',
+    eyebrow: 'The possibilities begin here',
+    headline: 'A future shaped|by nature|and science',
+    intro: 'Exploring plant-based chemistry for the materials we use every day',
     cta: 'Explore our science',
     secondary: 'Let’s start a conversation',
-    caption: 'Small beginnings, extraordinary possibilities'
+    caption: 'A different perspective on what comes next',
+    scenes: [
+      {image:'forest.webp',label:'Nature',caption:'It starts with nature'},
+      {image:'lab.webp',label:'Discovery',caption:'It grows through discovery'},
+      {image:'leaf.webp',label:'Possibility',caption:'It opens new possibilities'}
+    ]
   },
   technology: {
     eyebrow: 'Technology & applications',
-    title: 'One natural starting point|A world of possibilities',
+    title: 'Biology opens|a world of possibilities',
     intro: 'Our concept connects renewable plant resources with thoughtful molecular design — opening a conversation across three fields',
     applications: [
-      { title: 'Personal care', text: 'Exploring plant-derived ingredients for the next generation of everyday formulations', icon: 'drop', tag: 'Made for everyday life' },
-      { title: 'Materials & coatings', text: 'Reconsidering how renewable chemistry could become part of the materials around us', icon: 'layers', tag: 'Designed with purpose' },
-      { title: 'Agriculture', text: 'Imagining new uses for agricultural side streams, from the field to the laboratory', icon: 'sprout', tag: 'Inspired by circularity' }
+      { title: 'Personal care', text: 'Exploring plant-derived ingredients for the next generation of everyday formulations', icon: 'drop', tag: 'Everyday formulations',image:'lab.webp',alt:'A pipette above a tray of laboratory sample tubes' },
+      { title: 'Materials & coatings', text: 'Reconsidering how renewable chemistry could become part of the materials around us', icon: 'layers', tag: 'Thoughtful materials',image:'research.webp',alt:'Glass beakers and a pipette on a laboratory bench' },
+      { title: 'Agriculture', text: 'Imagining new uses for agricultural side streams, from the field to the laboratory', icon: 'sprout', tag: 'Renewable resources',image:'growth.webp',alt:'Fresh green leaves growing from a plant stem' }
     ]
   },
   challenge: {

@@ -2,7 +2,7 @@
   'use strict';
   const c = window.VERDA_CONTENT;
   const esc = value => String(value).replace(/[&<>"']/g, x => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
-  const lines = value => value.split('|').map(esc).join('<br>');
+  const lines = value => value.split('|').map(esc).join('<br> ');
   const mark = `<svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 32C6 27 2 14 5 7c8-1 15 7 15 15C20 13 27 5 35 5c3 12-3 23-15 27Z" fill="currentColor"/><path d="M20 34V17" stroke="currentColor" stroke-width="2"/></svg>`;
   const icons = {
     drop: '<path d="M40 9C34 21 19 31 19 47a21 21 0 0 0 42 0C61 31 46 21 40 9Z"/><path d="M28 48c0 7 5 12 12 12"/>',
@@ -13,6 +13,7 @@
   const nav = [['technology','Our science'],['approach','Our approach'],['folia','Folia'],['vision','Vision'],['team','Team'],['faq','FAQ']];
   document.title = c.title;
   document.querySelector('#site').innerHTML = `
+    <div class="utility-bar"><div class="wrap"><span>A biotechnology concept, inspired by possibility</span><span>Nature · Science · Tomorrow</span></div></div>
     <header class="header">
       <div class="header-inner wrap">
         <a href="#home" class="wordmark" aria-label="Verda home">${mark}<span>${esc(c.brand)}</span></a>
@@ -25,35 +26,29 @@
     </header>
     <main id="main">
       <section class="hero" id="home" aria-labelledby="hero-title">
-        <div class="hero-grid wrap">
+        <div class="hero-scenes" aria-hidden="true">${c.hero.scenes.map((s,i)=>`<img class="hero-scene ${i===0?'is-active':''}" src="assets/${esc(s.image)}" width="2000" height="1333" alt="" ${i===0?'fetchpriority="high"':''} data-scene-image="${i}">`).join('')}</div>
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content wrap">
           <div class="hero-copy">
             <p class="eyebrow">${esc(c.hero.eyebrow)}</p>
             <h1 id="hero-title">${lines(c.hero.headline)}</h1>
             <p class="intro">${esc(c.hero.intro)}</p>
-            <a class="button" href="#technology">${esc(c.hero.cta)}</a>
-            <a class="text-link hero-secondary" href="#contact">${esc(c.hero.secondary)}</a>
+            <div class="hero-actions"><a class="button button-light" href="#technology">${esc(c.hero.cta)}</a><a class="text-link" href="#contact">${esc(c.hero.secondary)}</a></div>
           </div>
-          <figure class="hero-visual">
-            <img class="hero-leaf" src="assets/leaf.webp" width="900" height="1350" alt="Layers of green leaves with delicate branching veins" fetchpriority="high">
-            <div class="hero-glow" aria-hidden="true"></div>
-            <div class="nature-orbit" aria-hidden="true"><div></div><span></span></div>
-            <div class="hero-specimen" aria-hidden="true"><img src="assets/molecule.svg" alt="" width="600" height="600"></div>
-            <figcaption><span>Nature × science</span><span>${esc(c.hero.caption)}</span></figcaption>
-          </figure>
         </div>
-        <div class="hero-baseline wrap"><span>Plant-inspired thinking</span><span class="baseline-rule"></span><span>A biotechnology concept</span></div>
+        <div class="hero-bottom wrap"><span class="scene-caption">${esc(c.hero.scenes[0].caption)}</span><div class="scene-controls" role="group" aria-label="Hero imagery">${c.hero.scenes.map((s,i)=>`<button type="button" data-scene="${i}" aria-pressed="${i===0}" aria-label="Show ${esc(s.label.toLowerCase())} imagery"><span></span>${esc(s.label)}</button>`).join('')}<button class="motion-toggle" type="button" aria-pressed="false" aria-label="Pause background imagery"><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause</span></button></div></div>
       </section>
 
       <section class="section technology" id="technology" aria-labelledby="technology-title">
         <div class="wrap">
           <div class="section-heading reveal"><div><p class="eyebrow">${esc(c.technology.eyebrow)}</p><h2 id="technology-title">${lines(c.technology.title)}</h2></div><p>${esc(c.technology.intro)}</p></div>
-          <div class="application-grid">${c.technology.applications.map(a=>`<article class="application reveal"><div class="application-art ${a.icon}">${icon(a.icon)}<span class="art-circle"></span></div><p class="micro">${esc(a.tag)}</p><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p><a class="text-link" href="#contact">Explore a collaboration<span class="sr-only"> in ${esc(a.title)}</span></a></article>`).join('')}</div>
+          <div class="application-grid">${c.technology.applications.map(a=>`<article class="application reveal"><div class="application-art"><img src="assets/${esc(a.image)}" width="1200" height="800" loading="lazy" alt="${esc(a.alt)}"></div><p class="micro">${esc(a.tag)}</p><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p><a class="text-link" href="#contact">Explore a collaboration<span class="sr-only"> in ${esc(a.title)}</span></a></article>`).join('')}</div>
         </div>
       </section>
 
       <section class="section approach" id="approach" aria-labelledby="approach-title">
         <div class="wrap approach-grid">
-          <div class="approach-image reveal"><img src="assets/forest.webp" loading="lazy" alt="Sunlight filtering through a green forest canopy" width="1200" height="800"><span class="image-note">A new perspective begins at the source</span></div>
+          <div class="approach-image reveal"><img src="assets/growth.webp" loading="lazy" alt="A plant reaching into a bright, open space" width="1400" height="1051"><span class="image-note">A new perspective begins at the source</span></div>
           <div class="approach-copy reveal"><p class="eyebrow">${esc(c.challenge.eyebrow)}</p><h2 id="approach-title">${lines(c.challenge.title)}</h2><p class="lead">${esc(c.challenge.intro)}</p><div class="approach-point"><span class="point-symbol" aria-hidden="true">−</span><div><h3>${esc(c.challenge.problem.title)}</h3><p>${esc(c.challenge.problem.text)}</p></div></div><div class="approach-point"><span class="point-symbol" aria-hidden="true">+</span><div><h3>${esc(c.challenge.solution.title)}</h3><p>${esc(c.challenge.solution.text)}</p></div></div></div>
           <ol class="process reveal">${c.challenge.steps.map((s,i)=>`<li><span class="process-dot" aria-hidden="true">${icon(['sprout','drop','layers'][i])}</span><span>${esc(s)}</span></li>`).join('')}</ol>
         </div>
@@ -62,12 +57,12 @@
       <section class="section product" id="folia" aria-labelledby="product-title">
         <div class="wrap product-grid">
           <div class="product-copy reveal"><p class="eyebrow">${esc(c.product.eyebrow)}</p><p class="product-name">${esc(c.product.name)}</p><h2 id="product-title">${lines(c.product.title)}</h2><p class="lead">${esc(c.product.intro)}</p><dl>${c.product.facts.map(([label,value])=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl><a class="button" href="#contact">${esc(c.product.cta)}</a></div>
-          <figure class="molecule-figure reveal"><div class="molecule-stage"><span class="stage-label">Folia / Plant chemistry concept</span><div class="molecule-rings" aria-hidden="true"></div><img class="molecule" src="assets/molecule.svg" width="600" height="600" loading="lazy" alt="Abstract amber and green molecular sculpture, an artistic illustration rather than a chemical structure"><span class="stage-bottom">Nature, seen in a different light</span></div><figcaption>${esc(c.product.note)}</figcaption></figure>
+          <figure class="molecule-figure reveal"><div class="molecule-stage"><span class="stage-label">Folia / A research concept</span><div class="molecule-field" aria-hidden="true"></div><img class="molecule" src="assets/molecule.svg" width="600" height="600" loading="lazy" alt="Abstract amber and green molecular sculpture, an artistic illustration rather than a chemical structure"><span class="stage-bottom">Nature, seen in a different light</span></div><figcaption>${esc(c.product.note)}</figcaption></figure>
         </div>
       </section>
 
       <section class="vision" id="vision" aria-labelledby="vision-title">
-        <img src="assets/forest.webp" alt="" width="1200" height="800" loading="lazy" aria-hidden="true"><div class="vision-overlay"></div><div class="wrap vision-content reveal"><p class="eyebrow">${esc(c.vision.eyebrow)}</p><h2 id="vision-title">${lines(c.vision.title)}</h2><p>${esc(c.vision.text)}</p><a class="button button-light" href="#contact">${esc(c.vision.cta)}</a></div><span class="vision-flower" aria-hidden="true">${mark}</span>
+        <img src="assets/leaf.webp" alt="" width="900" height="1350" loading="lazy" aria-hidden="true"><div class="vision-overlay"></div><div class="wrap vision-content reveal"><p class="eyebrow">${esc(c.vision.eyebrow)}</p><h2 id="vision-title">${lines(c.vision.title)}</h2><p>${esc(c.vision.text)}</p><a class="button button-light" href="#contact">${esc(c.vision.cta)}</a></div>
       </section>
 
       <section class="section team" id="team" aria-labelledby="team-title"><div class="wrap"><div class="section-heading reveal"><div><p class="eyebrow">${esc(c.team.eyebrow)}</p><h2 id="team-title">${lines(c.team.title)}</h2></div><div><p>${esc(c.team.intro)}</p><p class="concept-note">${esc(c.team.note)}</p></div></div><div class="team-grid">${c.team.people.map(p=>`<article class="person reveal"><img src="assets/${esc(p.image)}" width="400" height="440" alt="Illustrative portrait of fictional team member ${esc(p.name)}" loading="lazy"><p class="micro">${esc(p.role)}</p><h3>${esc(p.name)}</h3><p>${esc(p.bio)}</p></article>`).join('')}</div></div></section>
@@ -76,8 +71,7 @@
 
       <section class="section contact" id="contact" aria-labelledby="contact-title"><div class="wrap contact-grid"><div class="reveal"><p class="eyebrow">${esc(c.contact.eyebrow)}</p><h2 id="contact-title">${lines(c.contact.title)}</h2><p class="lead">${esc(c.contact.intro)}</p><div class="contact-mark" aria-hidden="true">${mark}</div><p class="concept-note">A fictional brand with real possibilities for your website</p></div><form id="contact-form" novalidate class="reveal"><p class="form-note"><span class="demo-badge">Demo mode</span>${esc(c.contact.demo)}</p><div class="form-row"><div class="field"><label for="name">Your name <span aria-hidden="true">*</span></label><input id="name" name="name" autocomplete="name" required maxlength="100" aria-describedby="name-error"><span class="field-error" id="name-error"></span></div><div class="field"><label for="email">Email address <span aria-hidden="true">*</span></label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254" aria-describedby="email-error"><span class="field-error" id="email-error"></span></div></div><div class="field"><label for="company">Company <span class="optional">(optional)</span></label><input id="company" name="company" autocomplete="organization" maxlength="150"></div><div class="field"><label for="interest">I’m interested in</label><select id="interest" name="interest"><option>Research collaboration</option><option>Personal care</option><option>Materials & coatings</option><option>Agriculture</option><option>Something else</option></select></div><div class="field"><label for="message">Your message <span aria-hidden="true">*</span></label><textarea id="message" name="message" rows="4" required minlength="10" maxlength="3000" aria-describedby="message-error" placeholder="Tell us a little about your idea"></textarea><span class="field-error" id="message-error"></span></div><button class="button" type="submit">Try the demo form</button><p class="form-required">* Required fields · No data is transmitted</p><p id="form-status" role="status" aria-live="polite" tabindex="-1" hidden></p></form></div></section>
     </main>
-    <footer><div class="wrap footer-top"><a href="#home" class="wordmark" aria-label="Verda home">${mark}<span>${esc(c.brand)}</span></a><p>A future grown from nature</p><a class="text-link" href="#home">Back to top</a></div><div class="wrap footer-bottom"><span>© ${new Date().getFullYear()} Verda · Fictional brand concept</span><span>Design exploration · Not a commercial or medical offering</span></div></footer>
-    <div class="concept-ribbon"><span>Verda is a fictional biotech brand</span><span>Website concept / For discussion</span></div>`;
+    <footer><div class="wrap footer-top"><div class="footer-brand"><a href="#home" class="wordmark" aria-label="Verda home">${mark}<span>${esc(c.brand)}</span></a><p>A future grown from nature</p></div><div class="footer-links"><p>Explore the possibilities</p><a href="#technology">Our science</a><a href="#folia">Molecule spotlight</a><a href="#vision">Our vision</a></div><div class="footer-links"><p>Get to know us</p><a href="#approach">Our approach</a><a href="#team">Founders & advisors</a><a href="#faq">Your questions</a></div><div class="footer-links"><p>Start a conversation</p><a href="#contact">Contact us</a><a href="#home">Back to top</a><span>English</span></div></div><div class="wrap footer-bottom"><span>© ${new Date().getFullYear()} Verda · Fictional brand concept</span><span>Design exploration · Not a commercial or medical offering</span></div></footer>`;
 
   const menu = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('#primary-nav');
@@ -127,6 +121,38 @@
   });
 
   const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  document.querySelectorAll('a[href="#home"]').forEach(link=>link.addEventListener('click',event=>{
+    event.preventDefault();
+    history.replaceState(null,'',location.pathname+location.search);
+    window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'});
+  }));
+  const hero=document.querySelector('.hero');
+  const scenes=[...document.querySelectorAll('.hero-scene')];
+  const sceneButtons=[...document.querySelectorAll('[data-scene]')];
+  const motionButton=document.querySelector('.motion-toggle');
+  let activeScene=0, paused=false, heroVisible=true, sceneTimer;
+  const showScene=index=>{
+    activeScene=index;
+    scenes.forEach((s,i)=>s.classList.toggle('is-active',i===index));
+    sceneButtons.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
+    document.querySelector('.scene-caption').textContent=c.hero.scenes[index].caption;
+  };
+  const syncMotion=()=>{
+    clearInterval(sceneTimer);
+    const off=paused || reducedMotion.matches;
+    hero.classList.toggle('motion-paused',off);
+    motionButton.disabled=reducedMotion.matches;
+    motionButton.setAttribute('aria-pressed',String(off));
+    motionButton.setAttribute('aria-label',reducedMotion.matches?'Background motion disabled by your preference':paused?'Resume background imagery':'Pause background imagery');
+    motionButton.querySelector('.motion-label').textContent=reducedMotion.matches?'Motion off':paused?'Play':'Pause';
+    if(!off && !document.hidden && heroVisible)sceneTimer=setInterval(()=>showScene((activeScene+1)%scenes.length),8500);
+  };
+  sceneButtons.forEach((b,i)=>b.addEventListener('click',()=>{showScene(i);paused=true;syncMotion();}));
+  motionButton.addEventListener('click',()=>{paused=!paused;syncMotion();});
+  document.addEventListener('visibilitychange',syncMotion);
+  reducedMotion.addEventListener('change',syncMotion);
+  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;syncMotion();},{threshold:0}).observe(hero);
+  syncMotion();
   if('IntersectionObserver' in window && !reducedMotion.matches){
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
     document.querySelectorAll('.reveal').forEach(el=>{el.classList.add('will-reveal');observer.observe(el);});
