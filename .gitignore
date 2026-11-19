@@ -1,0 +1,8 @@
+node_modules/
+preview.log
+preview-error.log
+preview.pid
+outputs/
+screenshots/
+hostinger-ready.zip
+.openai/

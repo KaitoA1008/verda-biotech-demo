@@ -1,0 +1,69 @@
+# Verda biotech landing page concept
+
+Local preview: http://127.0.0.1:4180
+
+GitHub repository: https://github.com/KaitoA1008/verda-biotech-demo
+
+GitHub Pages review URL (available after publication): https://kaitoa1008.github.io/verda-biotech-demo/
+
+The earlier Sites publication has been made private at the user's request GitHub is the publishing destination for this demo
+
+This is a fictional English-language biotech concept prepared for design discussion with Jun Kad. It has eight sections: Hero, Technology & Applications, Problem & Solution, Folia molecule highlight, Vision, Founders & Advisors, FAQ, Contact
+
+## Run locally
+
+Run `node serve.cjs` or `npm start` from this directory. The server binds only to `127.0.0.1:4180`. It needs Node.js and has no runtime package dependencies. If the port is occupied, use PowerShell `$env:PORT=4181` before starting
+
+The preview launched during authoring is running in a hidden process. Its process ID is recorded in `preview.pid`. Do not start a second copy on the same port
+
+## Change client content
+
+- `content.js`: brand name, section copy, applications, product facts, team, FAQ and contact feedback
+- `app.js`: page structure, labels, menu and form behavior
+- `style.css`: palette tokens, typography, responsive layout and motion
+- `assets/`: local photographs, original SVG illustrations and licensed fonts
+- `index.html`: document metadata and script/style entry points
+
+The logo is an original inline SVG in `app.js`. To replace it, update the `mark` variable and the favicon. Replace the image paths in `app.js` and team entries in `content.js` for client-supplied images
+
+## Hosting handoff
+
+`dist/` contains the runtime files only, ready for static hosting. `hostinger-ready.zip` contains the same files with `index.html` at archive root. After the client approves the direction, those files can be uploaded to Hostinger `public_html`. There is no build process, CMS, account system or backend
+
+This is plain HTML, CSS and JavaScript. A future Framer version would need to be recreated or embedded; this is not a native Framer project
+
+Public hosting is authorized for temporary review No client message or external form submission is made by this project
+
+## Demo behavior
+
+- Section anchors, responsive menu with Escape dismissal, native keyboard-accessible FAQ
+- Required name, email and message with inline validation and first-invalid-field focus
+- Successful validation explicitly says no message was sent or saved
+- No endpoint, fetch, analytics, localStorage, sessionStorage or cookies
+- Local image/font assets and reduced-motion support
+- Fictional people and product; no clinical, safety, performance or regulatory claims
+
+## Design references and provenance
+
+Cardasun: https://cardasun.com/ — inspected public HTML, colors, section structure and hero image. Design cues: mint/teal, restrained amber, nature plus chemistry, clear single-page narrative
+
+Novonesis: https://www.novonesis.com/en — inspected public page content, colors and hero imagery. Design cues: substantial typography, nature-led imagery, generous spacing and alternating visual rhythm
+
+Neither reference's logo, photography, product, text or illustrations is included in the deliverable. Reference images were used only for inspection and kept outside this project
+
+Nature images are downloaded from Unsplash and stored locally under the Unsplash license (https://unsplash.com/license)
+
+- Leaves: https://images.unsplash.com/photo-1518531933037-91b2f5f229cc
+- Forest: https://images.unsplash.com/photo-1441974231531-c6227db76b6e
+
+The molecule, four vector portraits, brand mark and application icons are original code-drawn SVG illustrations created for this concept. The molecule is artistic and is not a chemical structure
+
+Manrope font: https://github.com/google/fonts/tree/main/ofl/manrope — SIL Open Font License included in `assets/manrope-OFL.txt`
+
+## Verification
+
+Run `npm ci` then `npm test` with the preview server running. `qa.cjs` uses isolated headless Chromium; it does not attach to the user's existing Brave session. Set `QA_CHROMIUM` to an installed Chromium executable if required
+
+`qa-report.json` records the checks and viewport widths. `screenshots/` contains real rendered desktop/mobile screenshots, menu, form validation and demo completion states
+
+CUA was attempted but its URL-confidence safeguard stopped native Brave interaction. Visual QA was completed with a separate local-only headless Chromium instance

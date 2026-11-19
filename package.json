@@ -1,0 +1,13 @@
+{
+  "name": "verda-biotech-client-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Buildless biotech landing page concept with local preview and temporary review hosting",
+  "scripts": {
+    "start": "node serve.cjs",
+    "test": "node qa.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.1"
+  }
+}
