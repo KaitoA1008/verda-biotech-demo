@@ -18,6 +18,8 @@ After a second direct review of Cardasun and Novonesis, motion adds a short stag
 
 The Pause control now pauses all decorative animation and smooth scrolling It preserves loop phases when paused Animation loops stop outside their viewport or while the tab is hidden Reduced motion removes the animation and shows readable final states No animation library or rendering loop is added
 
+The compact navigation is 64px tall on desktop and 60px on mobile Hero scenes change every 4.25 seconds with a 0.8-second crossfade and an 8.5-second drift cycle
+
 The second design pass follows a direct browser review of Novonesis: full-width photographic hero, centered display typography, pale mint fields, rectangular photography, quiet green buttons, generous editorial spacing and a dark green footer
 
 Hero imagery crossfades gently between nature and laboratory scenes The visitor can choose an image or pause/resume the sequence Automatic changes stop when the hero is out of view, the tab is hidden or reduced motion is requested

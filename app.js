@@ -150,7 +150,7 @@
     motionButton.setAttribute('aria-pressed',String(off));
     motionButton.setAttribute('aria-label',reducedMotion.matches?'Animations disabled by your preference':paused?'Resume animations':'Pause animations');
     motionButton.querySelector('.motion-label').textContent=reducedMotion.matches?'Motion off':paused?'Play':'Pause';
-    if(!off && !document.hidden && heroVisible)sceneTimer=setInterval(()=>showScene((activeScene+1)%scenes.length),8500);
+    if(!off && !document.hidden && heroVisible)sceneTimer=setInterval(()=>showScene((activeScene+1)%scenes.length),4250);
   };
   sceneButtons.forEach((b,i)=>b.addEventListener('click',()=>{showScene(i);paused=true;syncMotion();}));
   motionButton.addEventListener('click',()=>{paused=!paused;syncMotion();});

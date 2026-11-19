@@ -99,7 +99,7 @@ let browser;
  for(const [label,id] of [['Our science','technology'],['Our approach','approach'],['Folia','folia'],['Vision','vision'],['Team','team'],['FAQ','faq'],['Let’s talk','contact']]){
   await page.getByRole('navigation').getByRole('link',{name:label,exact:true}).click();
   const top=await page.locator('#'+id).evaluate(e=>e.getBoundingClientRect().top);
-  check(`Desktop navigation ${label}`,new URL(page.url()).hash==='#'+id && top>=90 && top<110);
+  check(`Desktop navigation ${label}`,new URL(page.url()).hash==='#'+id && top>=64 && top<100);
  }
  await page.emulateMedia({reducedMotion:'no-preference'});
  await page.goto(base,{waitUntil:'networkidle'});
