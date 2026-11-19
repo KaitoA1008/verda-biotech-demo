@@ -1,0 +1,98 @@
+{
+  "result": "PASS",
+  "method": "Direct CUA browser checks",
+  "viewports": [
+    {
+      "controlBottom": 969.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 970,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 1920
+    },
+    {
+      "controlBottom": 799.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 800,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 1920
+    },
+    {
+      "controlBottom": 899.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 900,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 1440
+    },
+    {
+      "controlBottom": 767.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 768,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 1366
+    },
+    {
+      "controlBottom": 649.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 650,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 1366
+    },
+    {
+      "controlBottom": 767.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 768,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 1024
+    },
+    {
+      "controlBottom": 374.796875,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 375,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 812
+    },
+    {
+      "controlBottom": 810.390625,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 812,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 375
+    },
+    {
+      "controlBottom": 665.390625,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 667,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 375
+    },
+    {
+      "controlBottom": 566.390625,
+      "controlsInViewport": true,
+      "copyClearOfControls": true,
+      "height": 568,
+      "noHorizontalOverflow": true,
+      "scrollY": 0,
+      "width": 320
+    }
+  ],
+  "pauseWorks": true,
+  "resumeWorks": true
+}

@@ -20,6 +20,8 @@ The Pause control now pauses all decorative animation and smooth scrolling It pr
 
 The compact navigation is 64px tall on desktop and 60px on mobile Hero scenes change every 4.25 seconds with a 0.8-second crossfade and an 8.5-second drift cycle
 
+Hero height follows the viewport after accounting for navigation and the utility bar Media controls occupy their own grid row instead of overlaying the copy Short screens use tighter spacing and responsive display type so Pause and the scene selectors remain visible
+
 The second design pass follows a direct browser review of Novonesis: full-width photographic hero, centered display typography, pale mint fields, rectangular photography, quiet green buttons, generous editorial spacing and a dark green footer
 
 Hero imagery crossfades gently between nature and laboratory scenes The visitor can choose an image or pause/resume the sequence Automatic changes stop when the hero is out of view, the tab is hidden or reduced motion is requested

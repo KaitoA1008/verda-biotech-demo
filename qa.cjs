@@ -36,6 +36,12 @@ let browser;
  check('Reduced motion disables automatic imagery',await page.locator('.motion-toggle').isDisabled());
  check('Reduced motion puts all decorative motion in static mode',await page.locator('html').getAttribute('data-motion')==='reduced' && await page.locator('.molecule').evaluate(e=>getComputedStyle(e).animationName)==='none');
  check('Reduced motion disables smooth scrolling',await page.locator('html').evaluate(e=>getComputedStyle(e).scrollBehavior)==='auto');
+ for(const [width,height] of [[1920,970],[1920,800],[1366,650],[812,375],[375,667],[320,568]]){
+  await page.setViewportSize({width,height});
+  await page.goto(base,{waitUntil:'networkidle'});
+  check(`Hero controls fit ${width}x${height}`,await page.locator('.scene-controls button').evaluateAll(buttons=>buttons.filter(b=>getComputedStyle(b).display!=='none').every(b=>{const r=b.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=document.documentElement.clientWidth+1;})));
+  check(`Hero content clears controls at ${width}x${height}`,await page.evaluate(()=>document.querySelector('.hero-copy').getBoundingClientRect().bottom<=document.querySelector('.hero-bottom').getBoundingClientRect().top-8));
+ }
  for(const width of [1440,1024,768,375,320]){
   await page.setViewportSize({width,height:width<500?812:1000});
   await page.goto(base,{waitUntil:'networkidle'});
