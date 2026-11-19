@@ -1,0 +1,82 @@
+{
+  "result": "PASS",
+  "method": "Direct CUA browser checks",
+  "checks": {
+    "heroDriftChanges": true,
+    "pauseFreezesExactPhase": true,
+    "globalPauseStopsMolecule": true,
+    "moleculeRunsInView": true,
+    "heroStopsOutsideView": true,
+    "moleculeTransformChanges": true,
+    "escapeClosesMenu": true,
+    "moleculeStopsOutsideView": true,
+    "visibleMoleculeFreezes": true,
+    "orbitPauses": true
+  },
+  "faq": [
+    {
+      "question": "What is Verda?",
+      "toggles": true,
+      "restores": true
+    },
+    {
+      "question": "What does plant-derived chemistry mean here?",
+      "toggles": true,
+      "restores": true
+    },
+    {
+      "question": "Is Folia a commercially available product?",
+      "toggles": true,
+      "restores": true
+    },
+    {
+      "question": "Who is this concept designed to speak to?",
+      "toggles": true,
+      "restores": true
+    },
+    {
+      "question": "Can we discuss a collaboration?",
+      "toggles": true,
+      "restores": true
+    }
+  ],
+  "viewports": [
+    {
+      "brokenLinks": [],
+      "noOverflow": true,
+      "scrollWidth": 305,
+      "sections": 8,
+      "width": 320
+    },
+    {
+      "brokenLinks": [],
+      "noOverflow": true,
+      "scrollWidth": 360,
+      "sections": 8,
+      "width": 375
+    },
+    {
+      "brokenLinks": [],
+      "noOverflow": true,
+      "scrollWidth": 753,
+      "sections": 8,
+      "width": 768
+    },
+    {
+      "brokenLinks": [],
+      "noOverflow": true,
+      "scrollWidth": 1009,
+      "sections": 8,
+      "width": 1024
+    },
+    {
+      "brokenLinks": [],
+      "noOverflow": true,
+      "scrollWidth": 1425,
+      "sections": 8,
+      "width": 1440
+    }
+  ],
+  "errors": [],
+  "reducedMotion": "CSS media query and JS preference gate reviewed; OS preference was not changed during CUA checks"
+}

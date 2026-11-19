@@ -12,6 +12,12 @@ This is a fictional English-language biotech concept prepared for design discuss
 
 ## Reference revision
 
+### Animation pass
+
+After a second direct review of Cardasun and Novonesis, motion adds a short staggered headline entrance, slow photographic drift, editorial image reveals, a drawn process line, a gently floating molecular illustration with subtle orbit lines, menu transitions and native FAQ height transitions where supported
+
+The Pause control now pauses all decorative animation and smooth scrolling It preserves loop phases when paused Animation loops stop outside their viewport or while the tab is hidden Reduced motion removes the animation and shows readable final states No animation library or rendering loop is added
+
 The second design pass follows a direct browser review of Novonesis: full-width photographic hero, centered display typography, pale mint fields, rectangular photography, quiet green buttons, generous editorial spacing and a dark green footer
 
 Hero imagery crossfades gently between nature and laboratory scenes The visitor can choose an image or pause/resume the sequence Automatic changes stop when the hero is out of view, the tab is hidden or reduced motion is requested
@@ -75,6 +81,6 @@ Manrope font: https://github.com/google/fonts/tree/main/ofl/manrope — SIL Open
 
 Run `npm ci` then `npm test` with the preview server running. `qa.cjs` uses isolated headless Chromium; it does not attach to the user's existing Brave session. Set `QA_CHROMIUM` to an installed Chromium executable if required
 
-`qa-report.json` records the initial design checks `qa-cua-report.json` records the current revision's direct browser checks `screenshots/novonesis-revision-*` contains current desktop/mobile screenshots, menu, product and form states
+`qa-report.json` records the initial design checks `qa-cua-report.json` records the photographic revision's checks `qa-motion-cua-report.json` records the animation pass, including real transform changes and phase-preserving pause checks `screenshots/animation-*` contains the latest desktop/mobile motion views
 
 The initial version was checked in isolated headless Chromium after native Brave access was stopped The Novonesis revision was visually inspected and tested directly through CUA in the in-app browser at 320, 375, 768, 1024 and 1440px

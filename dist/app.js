@@ -31,12 +31,12 @@
         <div class="hero-content wrap">
           <div class="hero-copy">
             <p class="eyebrow">${esc(c.hero.eyebrow)}</p>
-            <h1 id="hero-title">${lines(c.hero.headline)}</h1>
+            <h1 id="hero-title" aria-label="${esc(c.hero.headline.replaceAll('|',' '))}">${c.hero.headline.split('|').map((line,i)=>`<span class="hero-line" aria-hidden="true"><span style="--line-delay:${i*120}ms">${esc(line)}</span></span>`).join('')}</h1>
             <p class="intro">${esc(c.hero.intro)}</p>
             <div class="hero-actions"><a class="button button-light" href="#technology">${esc(c.hero.cta)}</a><a class="text-link" href="#contact">${esc(c.hero.secondary)}</a></div>
           </div>
         </div>
-        <div class="hero-bottom wrap"><span class="scene-caption">${esc(c.hero.scenes[0].caption)}</span><div class="scene-controls" role="group" aria-label="Hero imagery">${c.hero.scenes.map((s,i)=>`<button type="button" data-scene="${i}" aria-pressed="${i===0}" aria-label="Show ${esc(s.label.toLowerCase())} imagery"><span></span>${esc(s.label)}</button>`).join('')}<button class="motion-toggle" type="button" aria-pressed="false" aria-label="Pause background imagery"><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause</span></button></div></div>
+        <div class="hero-bottom wrap"><span class="scene-caption">${esc(c.hero.scenes[0].caption)}</span><div class="scene-controls" role="group" aria-label="Hero imagery">${c.hero.scenes.map((s,i)=>`<button type="button" data-scene="${i}" aria-pressed="${i===0}" aria-label="Show ${esc(s.label.toLowerCase())} imagery"><span></span>${esc(s.label)}</button>`).join('')}<button class="motion-toggle" type="button" aria-pressed="false" aria-label="Pause animations"><span class="motion-icon" aria-hidden="true"></span><span class="motion-label">Pause</span></button></div></div>
       </section>
 
       <section class="section technology" id="technology" aria-labelledby="technology-title">
@@ -57,7 +57,7 @@
       <section class="section product" id="folia" aria-labelledby="product-title">
         <div class="wrap product-grid">
           <div class="product-copy reveal"><p class="eyebrow">${esc(c.product.eyebrow)}</p><p class="product-name">${esc(c.product.name)}</p><h2 id="product-title">${lines(c.product.title)}</h2><p class="lead">${esc(c.product.intro)}</p><dl>${c.product.facts.map(([label,value])=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl><a class="button" href="#contact">${esc(c.product.cta)}</a></div>
-          <figure class="molecule-figure reveal"><div class="molecule-stage"><span class="stage-label">Folia / A research concept</span><div class="molecule-field" aria-hidden="true"></div><img class="molecule" src="assets/molecule.svg" width="600" height="600" loading="lazy" alt="Abstract amber and green molecular sculpture, an artistic illustration rather than a chemical structure"><span class="stage-bottom">Nature, seen in a different light</span></div><figcaption>${esc(c.product.note)}</figcaption></figure>
+          <figure class="molecule-figure reveal"><div class="molecule-stage"><span class="stage-label">Folia / A research concept</span><div class="molecule-field" aria-hidden="true"></div><div class="molecule-orbit" aria-hidden="true"><svg viewBox="0 0 600 600" fill="none"><ellipse cx="300" cy="300" rx="240" ry="164" stroke="currentColor" stroke-width="1"/><ellipse cx="300" cy="300" rx="218" ry="200" stroke="currentColor" stroke-width=".7" stroke-dasharray="2 10"/><circle cx="540" cy="300" r="5" fill="currentColor"/><circle cx="60" cy="300" r="3" fill="currentColor"/></svg></div><img class="molecule" src="assets/molecule.svg" width="600" height="600" loading="lazy" alt="Abstract amber and green molecular sculpture, an artistic illustration rather than a chemical structure"><span class="stage-bottom">Nature, seen in a different light</span></div><figcaption>${esc(c.product.note)}</figcaption></figure>
         </div>
       </section>
 
@@ -121,10 +121,12 @@
   });
 
   const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  const motionRoot=document.documentElement;
+  const motionStages=[...document.querySelectorAll('.molecule-stage')];
   document.querySelectorAll('a[href="#home"]').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
     history.replaceState(null,'',location.pathname+location.search);
-    window.scrollTo({top:0,behavior:reducedMotion.matches?'instant':'smooth'});
+    window.scrollTo({top:0,behavior:motionRoot.classList.contains('motion-off')?'instant':'smooth'});
   }));
   const hero=document.querySelector('.hero');
   const scenes=[...document.querySelectorAll('.hero-scene')];
@@ -140,10 +142,13 @@
   const syncMotion=()=>{
     clearInterval(sceneTimer);
     const off=paused || reducedMotion.matches;
+    motionRoot.classList.toggle('motion-off',off);
+    motionRoot.classList.toggle('motion-suspended',document.hidden);
+    motionRoot.dataset.motion=reducedMotion.matches?'reduced':paused?'paused':'running';
     hero.classList.toggle('motion-paused',off);
     motionButton.disabled=reducedMotion.matches;
     motionButton.setAttribute('aria-pressed',String(off));
-    motionButton.setAttribute('aria-label',reducedMotion.matches?'Background motion disabled by your preference':paused?'Resume background imagery':'Pause background imagery');
+    motionButton.setAttribute('aria-label',reducedMotion.matches?'Animations disabled by your preference':paused?'Resume animations':'Pause animations');
     motionButton.querySelector('.motion-label').textContent=reducedMotion.matches?'Motion off':paused?'Play':'Pause';
     if(!off && !document.hidden && heroVisible)sceneTimer=setInterval(()=>showScene((activeScene+1)%scenes.length),8500);
   };
@@ -151,8 +156,23 @@
   motionButton.addEventListener('click',()=>{paused=!paused;syncMotion();});
   document.addEventListener('visibilitychange',syncMotion);
   reducedMotion.addEventListener('change',syncMotion);
-  if('IntersectionObserver' in window)new IntersectionObserver(entries=>{heroVisible=entries[0].isIntersecting;syncMotion();},{threshold:0}).observe(hero);
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(entries=>{
+      heroVisible=entries[0].isIntersecting;
+      hero.classList.toggle('motion-visible',heroVisible);
+      syncMotion();
+    },{threshold:0}).observe(hero);
+    const stageObserver=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('motion-visible',entry.isIntersecting)),{threshold:.12});
+    motionStages.forEach(stage=>stageObserver.observe(stage));
+  } else {
+    hero.classList.add('motion-visible');
+    motionStages.forEach(stage=>stage.classList.add('motion-visible'));
+  }
   syncMotion();
+  if(!reducedMotion.matches){
+    hero.classList.add('has-intro');
+    setTimeout(()=>hero.classList.remove('has-intro'),1800);
+  }
   if('IntersectionObserver' in window && !reducedMotion.matches){
     const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}}),{threshold:.08});
     document.querySelectorAll('.reveal').forEach(el=>{el.classList.add('will-reveal');observer.observe(el);});
